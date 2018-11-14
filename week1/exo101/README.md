@@ -23,7 +23,8 @@ La distance retournée doit être : 834,7 km
 - Compilation de la servlet:
 
 ```bash
-javac -cp C:\java\apache-tomcat-8.5.34\lib\servlet-api.jar MyServlet.java
+C:\> cd C:\java\tomcat-8.5.34\webapps
+C:\java\tomcat-8.5.34\webapps> javac -cp C:\java\tomcat-8.5.34\lib\servlet-api.jar exo101\WEB-INF\classes\MyServlet.java
 ```
 
 - Lancement de tomcat:
@@ -31,5 +32,6 @@ javac -cp C:\java\apache-tomcat-8.5.34\lib\servlet-api.jar MyServlet.java
 Il faut relancer tomcat à chaque re-compilation de la servlet:
 
 ```bash
-C:\java\apache-tomcat-8.5.34\bin\catalina.bat run
+C:\> cd C:\java\tomcat-8.5.34\bin\
+C:\java\tomcat-8.5.34\bin> catalina.bat run
 ```
