@@ -14,8 +14,6 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/cart")
 public class WebCartServlet extends HttpServlet {
 
-    Cart myCart = new Cart();
-
     private static final String TITLE_PAGE = "EXO 103 - Cart";
 
     @Override
@@ -28,7 +26,12 @@ public class WebCartServlet extends HttpServlet {
             "<input type=\"submit\" value=\"Valider\">" +
             "</form>";
 
-        this.buildAndWriteResponse(res, TITLE_PAGE + " Form", content, this.myCart);
+        // get the user session
+        HttpSession session = req.getSession();
+        // get the cart or create it if not exists
+        Cart cart = (Cart)session.getAttribute("cart");
+        // build en write the response
+        this.buildAndWriteResponse(res, TITLE_PAGE + " Form", content, cart);
     }
 
 
@@ -48,7 +51,17 @@ public class WebCartServlet extends HttpServlet {
             content = "ERROR 400 : Les paramètres [ref] et [qty] sont manquants";
             this.buildAndWriteResponse(res, pageTitle, content);
         } else {
-            this.myCart.addToCart(ref, Integer.parseInt(qty));
+            // get the user session
+            HttpSession session = req.getSession();
+            // get the cart or create it if not exists
+            Cart cart = (Cart)session.getAttribute("cart");
+            if (null == cart) {
+                cart = new Cart();
+            }
+            // add item in the cart
+            cart.addToCart(ref, Integer.parseInt(qty));
+            // set the cart to the user session
+            session.setAttribute("cart", cart);
             // sendRedirect to /cart with request dispatcher
             res.sendRedirect(req.getContextPath() + "/cart");
         }
@@ -62,13 +75,13 @@ public class WebCartServlet extends HttpServlet {
             this.writeResponse(out);
     }
 
-    private void buildAndWriteResponse(HttpServletResponse resp, String title, String content, Cart myCart)
+    private void buildAndWriteResponse(HttpServletResponse resp, String title, String content, Cart cart)
         throws IOException {
             PrintWriter out = this.prepareResponse(resp, title);
             this.appendTitle(out);
-            if (!myCart.isEmpty()) {
+            if (null != cart && !cart.isEmpty()) {
                 out.append("<h3>Récapitulatif du panier</h3>\n");
-                myCart.print(out);
+                cart.print(out);
             }
             out.append(content);
             this.writeResponse(out);
