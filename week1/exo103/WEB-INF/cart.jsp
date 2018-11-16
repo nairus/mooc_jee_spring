@@ -8,7 +8,7 @@
     <body>
         <h1>Panier</h1>
         <%
-            Cart myCart = (webcart.Cart)session.getAttribute("cart");
+            Cart myCart = request.getAttribute("cart");
             if (null != myCart && !myCart.isEmpty()) {
                 myCart.print(response.getWriter());
             }

@@ -20,19 +20,18 @@ public class WebCartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException {
-        // print a html form using printwriter.
-        String content = "<form action=\"/exo103/cart\" method=\"POST\">" +
-            "<div>REF: <input type=\"text\" name=\"ref\"></div>" +
-            "<div>QTY: <input type=\"text\" name=\"qty\"></div>" +
-            "<input type=\"submit\" value=\"Valider\">" +
-            "</form>";
-
         // get the user session
         HttpSession session = req.getSession();
         // get the cart or create it if not exists
         Cart cart = (Cart)session.getAttribute("cart");
-        // build en write the response
-        this.buildAndWriteResponse(res, TITLE_PAGE + " Form", content, cart);
+        if (null == cart) {
+            cart = new Cart();
+        }
+        // set attribute to the request
+        req.setAttribute("cart", cart);
+        // forward to cart.jsp with request dispatcher
+        RequestDispatcher rd = req.getRequestDispatcher( "/WEB-INF/cart.jsp" );
+        rd.forward(req, res);
     }
 
 
@@ -63,9 +62,8 @@ public class WebCartServlet extends HttpServlet {
             cart.addToCart(ref, Integer.parseInt(qty));
             // set the cart to the user session
             session.setAttribute("cart", cart);
-            // forward to cart.jsp with request dispatcher
-            RequestDispatcher rd = req.getRequestDispatcher( "/cart.jsp" );
-            rd.forward(req, res);
+            // send redirect directive to GET /cart
+            res.sendRedirect(req.getContextPath() + "/cart");
         }
     }
 

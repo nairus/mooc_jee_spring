@@ -35,7 +35,9 @@ public class Cart {
         }
     }
 
-
+    public Boolean isEmpty() {
+        return this.entries.isEmpty();
+    }
 
     public void print(Writer out) {
         try {
@@ -45,6 +47,18 @@ public class Cart {
             }
             out.append("</ul>\n");
         } catch (IOException e) {}
+    }
+
+    public String getHtml() {
+        String html = "";
+        if (!this.isEmpty()) {
+            html += "<ul>\n";
+            for ( Entry<String, Integer> entry : entries.entrySet() ) {
+                html += String.format("<li>%s (x %03d)</li>\n", entry.getKey(), entry.getValue());
+            }
+            html += "</ul>\n";
+        }
+        return html;
     }
 
     public boolean mayAdd( String reference, int quantity  ) {
