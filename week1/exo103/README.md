@@ -51,7 +51,7 @@ Essayez de nouveau de manipuler le panier dans deux navigateurs différents. Cha
 Exécutez votre jsp en allant sur [cart.jsp](http://localhost:8080/exo103/cart.jsp)
 
 Le fonctionnement est tout à fait similaire à ce que l'on ferait dans une servlet. Il serait possible de développer toutes les fonctions d'un site uniquement à l'aide de jsp.  
-On préfère généralement développer les "traitements" contenant beacoup de java dans des servlets, et la partie graphique contenant beaucoup de html dans des jsp.
+On préfère généralement développer les "traitements" contenant beaucoup de java dans des servlets, et la partie graphique contenant beaucoup de html dans des jsp.
 
 ## Déléguer l'affichage à une JSP
 
@@ -105,6 +105,12 @@ Cette librairie pourra être distribuée, avec sa documentation, à d'autres dé
    ```bash
    C:\> cd C:\java\tomcat-8.5.34\webapps
    C:\java\tomcat-8.5.34\webapps> javac -sourcepath exo103\WEB-INF\classes -cp C:\java\tomcat-8.5.34\lib\servlet-api.jar exo103\WEB-INF\classes\webcart\WebCartServlet.java
+   ```
+
+1. Créer une archive à partir du package
+
+   ```bash
+   C:\java\tomcat-8.5.34\webapps> jar cvf exo103\WEB-INF\lib\webcart.jar -C exo103\WEB-INF\classes\webcart\ .
    ```
 
 ### Lancement de tomcat

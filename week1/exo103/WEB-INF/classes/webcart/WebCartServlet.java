@@ -3,6 +3,7 @@ package webcart;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -62,8 +63,9 @@ public class WebCartServlet extends HttpServlet {
             cart.addToCart(ref, Integer.parseInt(qty));
             // set the cart to the user session
             session.setAttribute("cart", cart);
-            // sendRedirect to /cart with request dispatcher
-            res.sendRedirect(req.getContextPath() + "/cart");
+            // forward to cart.jsp with request dispatcher
+            RequestDispatcher rd = req.getRequestDispatcher( "/cart.jsp" );
+            rd.forward(req, res);
         }
     }
 
