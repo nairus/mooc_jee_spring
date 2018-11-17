@@ -93,25 +93,34 @@ Cette librairie pourra être distribuée, avec sa documentation, à d'autres dé
 
 ### Compilation manuelle
 
+1. Aller dans les sources de l'exercice:
+
+   ```bash
+   C:\> cd C:\java\tomcat-8.5.34\webapps\exo103\src
+   ```
+
 1. Compiler la classe `Cart`
 
    ```bash
-   C:\> cd C:\java\tomcat-8.5.34\webapps
-   C:\java\tomcat-8.5.34\webapps> javac exo103\WEB-INF\classes\webcart\Cart.java
+      C:\...\exo103\src> javac webcart\Cart.java
    ```
 
 1. Compiler la servlet:
 
    ```bash
-   C:\> cd C:\java\tomcat-8.5.34\webapps
-   C:\java\tomcat-8.5.34\webapps> javac -sourcepath exo103\WEB-INF\classes -cp C:\java\tomcat-8.5.34\lib\servlet-api.jar exo103\WEB-INF\classes\webcart\WebCartServlet.java
+   C:\...\exo103\src> javac -sourcepath ../src -cp ".;C:\java\tomcat-8.5.34\lib\servlet-api.jar;C:\java\tomcat-8.5.34\webapps\exo103\WEB-INF\lib\commons-lang3-3.8.1.jar" webcart\WebCartServlet.java
    ```
 
 1. Créer une archive à partir du package
 
+   Arrêter tomcat s'il tourne puis lancer ces commandes:
+
    ```bash
-   C:\java\tomcat-8.5.34\webapps> jar cvf exo103\WEB-INF\lib\webcart.jar -C exo103\WEB-INF\classes\webcart\ .
+   C:\...\exo103\src> del ..\WEB-INF\lib\webcart.jar
+   C:\...\exo103\src> jar cvf ../WEB-INF\lib\webcart.jar webcart\*.class
    ```
+
+   Relancer tomcat pour appliquer les changements.
 
 ### Lancement de tomcat
 
@@ -119,5 +128,5 @@ Il faut relancer tomcat à chaque re-compilation de la servlet:
 
 ```bash
 C:\> cd C:\java\tomcat-8.5.34\bin\
-C:\java\tomcat-8.5.34\bin> catalina.bat run
+C:\...\bin> catalina.bat run
 ```

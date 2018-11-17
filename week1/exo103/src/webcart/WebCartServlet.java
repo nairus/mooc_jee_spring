@@ -1,5 +1,7 @@
 package webcart;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -45,12 +47,8 @@ public class WebCartServlet extends HttpServlet {
         String qty = req.getParameter("qty");
 
         String content;
-        if (this.isEmpty(ref) || this.isEmpty(qty)) {
-            // print error 400
-            res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            content = "ERROR 400 : Les paramètres [ref] et [qty] sont manquants";
-            this.buildAndWriteResponse(res, pageTitle, content);
-        } else {
+        // check if the ref is not blank and the qty is a numeric
+        if (StringUtils.isNotBlank(ref) && StringUtils.isNumeric(qty)) {
             // get the user session
             HttpSession session = req.getSession();
             // get the cart or create it if not exists
@@ -64,6 +62,19 @@ public class WebCartServlet extends HttpServlet {
             session.setAttribute("cart", cart);
             // send redirect directive to GET /cart
             res.sendRedirect(req.getContextPath() + "/cart");
+        } else {
+            content = "<h2>ERROR 400 :</h2>";
+            if (StringUtils.isBlank(ref)) {
+                content += "<p>Le paramère [ref] est invalide</p>";
+            }
+
+            if(!StringUtils.isNumeric(qty)) {
+                content += "<p>Le paramètre [qty] doit être un entier</p>";
+            }
+
+            // print error 400
+            res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            this.buildAndWriteResponse(res, pageTitle, content);
         }
     }
 
@@ -105,18 +116,6 @@ public class WebCartServlet extends HttpServlet {
     private void writeResponse(PrintWriter out) {
         out.append("</body></html>");
         out.flush();
-    }
-
-    private boolean isEmpty(String str) {
-        if (null == str) {
-            return true;
-        }
-
-        if ("" == str) {
-            return true;
-        }
-
-        return false;
     }
 
 }
