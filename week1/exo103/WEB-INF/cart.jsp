@@ -1,4 +1,7 @@
 <%@ page import="webcart.Cart" %>
+<%
+    Cart myCart = (webcart.Cart)request.getAttribute("cart");
+%>
 <!doctype html>
 <html>
     <head>
@@ -7,12 +10,7 @@
     </head>
     <body>
         <h1>Panier</h1>
-        <%
-            Cart myCart = request.getAttribute("cart");
-            if (null != myCart && !myCart.isEmpty()) {
-                myCart.print(response.getWriter());
-            }
-        %>
+        <%=myCart.getHtml()%>
         <form action="/exo103/cart" method="POST">
             <div>REF: <input type="text" name="ref"></div>
             <div>QTY: <input type="text" name="qty"></div>

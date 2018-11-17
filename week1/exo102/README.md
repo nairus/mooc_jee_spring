@@ -16,7 +16,7 @@
 
 ```bash
 C:\> cd C:\java\tomcat-8.5.34\webapps
-C:\java\tomcat-8.5.34\webapps> javac -cp C:\java\tomcat-8.5.34\lib\servlet-api.jar exo102\WEB-INF\classes\AuthServlet.java
+C:\...\webapps> javac -cp C:\java\tomcat-8.5.34\lib\servlet-api.jar exo102\WEB-INF\classes\AuthServlet.java
 ```
 
 - Lancement de tomcat:
@@ -25,5 +25,5 @@ Il faut relancer tomcat à chaque re-compilation de la servlet:
 
 ```bash
 C:\> cd C:\java\tomcat-8.5.34\bin\
-C:\java\tomcat-8.5.34\bin> catalina.bat run
+C:\...\bin> catalina.bat run
 ```
