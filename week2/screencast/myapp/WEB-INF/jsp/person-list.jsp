@@ -1,3 +1,8 @@
+<%@ page import="java.util.*" %>
+<%@ page import="person.Person" %>
+<%
+List<Person> persons = (List<Person>)request.getAttribute("persons");
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,28 +31,30 @@
     <div class="container">
 
 <div class="panel panel-default">
-	<div class="panel-heading">Liste des personnes</div>
-	<div class="panel-body">
-	<p>
-		<!-- show count of persons -->
-	</p>
-	</div>
-	<table class="table">
-		<tr>
-			<th>id</th>
-			<th>prénom</th>
-			<th>nom</th>
-			<th>age</th>
-		</tr>
-		
-		<!-- iterate through persons ... -->
-		<tr>
-			<td>id</td>
-			<td>prénom</td>
-			<td>nom</td>
-			<td>age</td>
-		</tr>
-	</table>
+    <div class="panel-heading">Liste des personnes</div>
+    <div class="panel-body">
+    <p>
+        <!-- show count of persons -->
+    </p>
+    </div>
+    <table class="table">
+        <tr>
+            <th>id</th>
+            <th>pr&eacute;nom</th>
+            <th>nom</th>
+            <th>&acirc;ge</th>
+        </tr>
+
+        <!-- iteratÃ©e through persons ... -->
+        <% for(Person p : persons) { %>
+        <tr>
+            <td><%=p.getId()%></td>
+            <td><%=p.getFirstName()%></td>
+            <td><%=p.getLastName()%></td>
+            <td><%=p.getAge()%></td>
+        </tr>
+        <% } %>
+    </table>
 
 </div>
 
