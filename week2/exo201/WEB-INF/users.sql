@@ -17,7 +17,7 @@ CREATE INDEX user_mail_idx ON users(email);
 
 -- users data
 insert into users
-  (firstname,   lastname,   email,                              password  ) 
+  (`firstname`, `lastname`,   `email`,                     `password` )
 values
   ('guillaume', 'dufrene',    'guillaume.dufrene@foo.bar', 'eservices'),
   ('lionel',    'seinturier', 'lionel.seinturier@foo.bar', 'eservices');
