@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import user.User;
 import user.UserDao;
@@ -25,11 +26,11 @@ import user.UserDaoSqlite;
 public class RegisterServlet extends HttpServlet {
 
     private static final String TITLE_PAGE = "EXO 201 - Register";
-    private static final String FIRST_NAME_PARAM = "inputFirstName";
-    private static final String LAST_NAME_PARAM = "inputLastName";
-    private static final String EMAIL_PARAM = "inputEmail";
-    private static final String PASSWORD_PARAM = "inputPassword";
-    private static final String PASSWORD_CONFIRM_PARAM = "inputPasswordConfirm";
+    private static final String FIRST_NAME_PARAM = "firstname";
+    private static final String LAST_NAME_PARAM = "lastname";
+    private static final String EMAIL_PARAM = "email";
+    private static final String PASSWORD_PARAM = "password";
+    private static final String PASSWORD_CONFIRM_PARAM = "passwordConfirm";
 
     private static final EmailValidator emailValidator = EmailValidator.getInstance();
 
@@ -45,25 +46,52 @@ public class RegisterServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // get the user session
+        HttpSession session = req.getSession();
+
+        // add the user registered
+        User user = (User)session.getAttribute("user");
+
+        if (null == user) {
+            // forward to register.jsp with request dispatcher
+            RequestDispatcher rd = req.getRequestDispatcher( "/register.jsp" );
+            rd.forward(req, resp);
+        } else {
+            // we write a success register message
+            String content = "<h2>Thank you " + user.getFirstname() + " " + user.getLastname() + "!</h2>" +
+                "<p>You has been registered successfully!</p>";
+            buildAndWriteResponse(resp, TITLE_PAGE + " Success", content);
+        }
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            // populate the user
+            User newUser = this.populateUser(req);
+
             // validate the form
             Map<String,String> errors = this.validate(req);
 
             // If there is errors we redirect on the form with errors map
             if (errors.size() > 0) {
                 req.setAttribute("errors", errors);
+                req.setAttribute("user", newUser);
 
                 // forward to register.jsp with request dispatcher
                 RequestDispatcher rd = req.getRequestDispatcher( "/register.jsp" );
                 rd.forward(req, resp);
             } else {
-                    // populate and register the user
-                    String password = req.getParameter(PASSWORD_PARAM);
-                    this.userDao.add(this.populateUser(req), password);
-
-                    // we write a success register message
-                    buildAndWriteResponse(resp, TITLE_PAGE + " Success", "You has been registered successfully!");
+                // register the user
+                String password = req.getParameter(PASSWORD_PARAM);
+                this.userDao.add(newUser, password);
+                // get the user session
+                HttpSession session = req.getSession();
+                // add the user registered
+                session.setAttribute("user", newUser);
+                // redirect in GET page /register
+                resp.sendRedirect(req.getContextPath() + "/register");
             }
         } catch (SQLException e) {
             // 503 : Service unavailable
@@ -92,7 +120,7 @@ public class RegisterServlet extends HttpServlet {
         Map<String, String> errors = new HashMap<>();
 
         if (StringUtils.isBlank(firstName)) {
-            errors.put(FIRST_NAME_PARAM, "The firsname is required");
+            errors.put(FIRST_NAME_PARAM, "The firstname is required");
         }
 
         if (StringUtils.isBlank(lastName)) {
@@ -110,7 +138,7 @@ public class RegisterServlet extends HttpServlet {
         }
 
         if (StringUtils.isNotBlank(password)) {
-            if (password != passwordConfirm) {
+            if (!password.equals(passwordConfirm)) {
                 errors.put(PASSWORD_CONFIRM_PARAM, "The password must be confirmed");
             }
         } else {

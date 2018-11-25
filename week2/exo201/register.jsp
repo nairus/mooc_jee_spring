@@ -1,10 +1,21 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="user.User" %>
 <%
 // Récupération de la map des erreurs du formulaire (champ => message d'erreur).
 Map<String, String> errors = (Map<String, String>)request.getAttribute("errors");
 if (null == errors) {
     errors = new HashMap<>();
+}
+
+User newUser = (User)request.getAttribute("user");
+String firstname = "";
+String lastname = "";
+String email = "";
+if (null != newUser) {
+    firstname = newUser.getFirstname();
+    lastname = newUser.getLastname();
+    email = newUser.getEmail();
 }
 %>
 <!DOCTYPE html>
@@ -44,22 +55,30 @@ if (null == errors) {
         	Register Now !
         </h2>
 
-        <label for="inputFirstName" class="sr-only">Firstname</label>
-        <input name="inputFirstName" id="inputFirstName"
-            class="form-control <%if(errors.containsKey("inputFirstName")){%>is-invalid<%}%>"
-            placeholder="firstname" required="" autofocus="" type="text">
+        <label for="firstname" class="sr-only">Firstname</label>
+        <input name="firstname" id="firstname" value="<%=firstname%>"
+            class="form-control <%if(errors.containsKey("firstname")){%>is-invalid<%}%>"
+            placeholder="Firstname" required="" autofocus="" type="text">
 
-        <label for="inputLastName" class="sr-only">Lastname</label>
-        <input name="inputLastName" id="inputLastName" class="form-control <%if(errors.containsKey("inputLastName")){%>is-invalid<%}%>" placeholder="lastname" required="" type="text">
+        <label for="lastname" class="sr-only">Lastname</label>
+        <input name="lastname" id="lastname" value="<%=lastname%>"
+            class="form-control <%if(errors.containsKey("lastname")){%>is-invalid<%}%>"
+            placeholder="Lastname" required="" type="text">
 
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input name="inputEmail" id="inputEmail" class="form-control <%if(errors.containsKey("inputEmail")){%>is-invalid<%}%>" placeholder="Email address" required="" type="email">
+        <label for="email" class="sr-only">Email address</label>
+        <input name="email" id="email" value="<%=email%>"
+            class="form-control <%if(errors.containsKey("email")){%>is-invalid<%}%>"
+            placeholder="Email address" required="" type="email">
 
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input name="inputPassword" id="inputPassword" class="form-control <%if(errors.containsKey("inputPassword")){%>is-invalid<%}%>" placeholder="Password" required="" type="password">
+        <label for="password" class="sr-only">Password</label>
+        <input name="password" id="password"
+            class="form-control <%if(errors.containsKey("password")){%>is-invalid<%}%>"
+            placeholder="Password" required="" type="password">
 
-        <label for="inputPasswordConfirm" class="sr-only">Confirm Password</label>
-        <input name="inputPasswordConfirm" id="inputPasswordConfirm" class="form-control <%if(errors.containsKey("inputPasswordConfirm")){%>is-invalid<%}%>" placeholder="confirm password" required="" type="password">
+        <label for="passwordConfirm" class="sr-only">Confirm Password</label>
+        <input name="passwordConfirm" id="passwordConfirm"
+            class="form-control <%if(errors.containsKey("passwordConfirm")){%>is-invalid<%}%>"
+            placeholder="Confirm password" required="" type="password">
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register !</button>
       </form>

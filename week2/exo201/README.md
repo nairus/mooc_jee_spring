@@ -32,7 +32,7 @@ Nous allons utiliser le DAO pour l'enregistrement des utilisateurs.
 
 A cette étape, vous devriez pouvoir faire passer le test "auth/SigninCheck"
 
-- Reprenez votre solution pour de l'exervice 1/02 en utilisant ce DAO pour la servlet d'authentification
+- Reprenez votre solution pour de l'exercice 1/02 en utilisant ce DAO pour la servlet d'authentification
 
 ## Astuces et pense-bête
 
@@ -46,5 +46,5 @@ A cette étape, vous devriez pouvoir faire passer le test "auth/SigninCheck"
 
    ```bash
     C:\> cd C:\java\tomcat-8.5.34\webapps\exo201\WEB-INF\classes
-    C:\..\WEB-INF> javac -cp ".;C:\java\tomcat-8.5.34\lib\servlet-api.jar;C:\java\tomcat-8.5.34\lib\commons-lang3-3.8.1.jar;C:\java\tomcat-8.5.34\lib\commons-validator-1.6.jar" RegisterServlet.java
+    C:\..\WEB-INF\classes> javac -cp ".;C:\java\tomcat-8.5.34\lib\servlet-api.jar;C:\java\tomcat-8.5.34\lib\commons-lang3-3.8.1.jar;C:\java\tomcat-8.5.34\lib\commons-validator-1.6.jar" RegisterServlet.java
    ```

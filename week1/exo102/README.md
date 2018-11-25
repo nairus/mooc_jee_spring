@@ -12,18 +12,25 @@
 
 ## Pense bête
 
-- Compilation de la servlet:
+1. Création de l'archive `ns-user-utils`
 
-```bash
-C:\> cd C:\java\tomcat-8.5.34\webapps
-C:\...\webapps> javac -cp C:\java\tomcat-8.5.34\lib\servlet-api.jar exo102\WEB-INF\classes\AuthServlet.java
-```
+   ```bash
+    C:\> cd C:\java\tomcat-8.5.34\webapps\exo201\WEB-INF\classes
+    C:\...\exo201\WEB-INF\classes> jar cvf ../../../exo102\WEB-INF\lib\ns-user-utils.jar user\*.class
+   ```
 
-- Lancement de tomcat:
+1. Compilation de la servlet:
 
-Il faut relancer tomcat à chaque re-compilation de la servlet:
+   ```bash
+    C:\...\exo201\WEB-INF\classes> cd C:\java\tomcat-8.5.34\webapps
+    C:\...\webapps> javac -cp ".;C:\java\tomcat-8.5.34\lib\servlet-api.jar;C:\java\tomcat-8.5.34\webapps\exo102\WEB-INF\lib\ns-user-utils.jar" exo102\WEB-INF\classes\AuthServlet.java
+   ```
 
-```bash
-C:\> cd C:\java\tomcat-8.5.34\bin\
-C:\...\bin> catalina.bat run
-```
+1. Lancement de tomcat:
+
+   Il faut relancer tomcat à chaque re-compilation de la servlet:
+
+   ```bash
+   C:\> cd C:\java\tomcat-8.5.34\bin\
+   C:\...\bin> catalina.bat run
+   ```
