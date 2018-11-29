@@ -46,5 +46,5 @@ A cette étape, vous devriez pouvoir faire passer le test "auth/SigninCheck"
 
    ```bash
     C:\> cd C:\java\tomcat-8.5.34\webapps\exo201\WEB-INF\classes
-    C:\..\WEB-INF\classes> javac -cp ".;C:\java\tomcat-8.5.34\lib\servlet-api.jar;C:\java\tomcat-8.5.34\lib\commons-lang3-3.8.1.jar;C:\java\tomcat-8.5.34\lib\commons-validator-1.6.jar" RegisterServlet.java
+    C:\..\WEB-INF\classes> javac -cp ".;C:\java\tomcat-8.5.34\lib\servlet-api.jar;C:\java\tomcat-8.5.34\lib\commons-lang3-3.8.1.jar;C:\java\tomcat-8.5.34\lib\commons-validator-1.6.jar" user\RegisterServlet.java
    ```

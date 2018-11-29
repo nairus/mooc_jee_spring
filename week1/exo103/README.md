@@ -96,19 +96,19 @@ Cette librairie pourra être distribuée, avec sa documentation, à d'autres dé
 1. Aller dans les sources de l'exercice:
 
    ```bash
-   C:\> cd C:\java\tomcat-8.5.34\webapps\exo103\src
+   C:\> cd C:\java\tomcat-8.5.34\webapps\exo103\WEB-INF\classes
    ```
 
 1. Compiler la classe `Cart`
 
    ```bash
-      C:\...\exo103\src> javac webcart\Cart.java
+      C:\...\exo103\WEB-INF\classes> javac webcart\Cart.java
    ```
 
 1. Compiler la servlet:
 
    ```bash
-   C:\...\exo103\src> javac -sourcepath ../src -cp ".;C:\java\tomcat-8.5.34\lib\servlet-api.jar;C:\java\tomcat-8.5.34\webapps\exo103\WEB-INF\lib\commons-lang3-3.8.1.jar" webcart\WebCartServlet.java
+   C:\...\exo103\WEB-INF\classes> javac -cp ".;C:\java\tomcat-8.5.34\lib\servlet-api.jar;C:\java\tomcat-8.5.34\webapps\exo103\WEB-INF\lib\commons-lang3-3.8.1.jar" webcart\WebCartServlet.java
    ```
 
 1. Créer une archive à partir du package
@@ -116,8 +116,8 @@ Cette librairie pourra être distribuée, avec sa documentation, à d'autres dé
    Arrêter tomcat s'il tourne puis lancer ces commandes:
 
    ```bash
-   C:\...\exo103\src> del ..\WEB-INF\lib\webcart.jar
-   C:\...\exo103\src> jar cvf ../WEB-INF\lib\webcart.jar webcart\*.class
+   C:\...\exo103\WEB-INF\classes> del ..\WEB-INF\lib\webcart.jar
+   C:\...\exo103\WEB-INF\classes> jar cvf ../WEB-INF\lib\webcart.jar webcart\*.class
    ```
 
    Relancer tomcat pour appliquer les changements.
