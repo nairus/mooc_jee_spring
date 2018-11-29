@@ -1,3 +1,3 @@
 # mooc_jee_spring
 
-MOOC JEE SPring, prêt à l'emploi !
+MOOC Java EE Spring prêt à l'emploi

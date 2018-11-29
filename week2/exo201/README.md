@@ -32,7 +32,7 @@ Nous allons utiliser le DAO pour l'enregistrement des utilisateurs.
 
 A cette étape, vous devriez pouvoir faire passer le test "auth/SigninCheck"
 
-- Reprenez votre solution pour de l'exercice 1/02 en utilisant ce DAO pour la servlet d'authentification
+- Reprenez votre solution de l'exercice 1/02 en utilisant ce DAO pour la servlet d'authentification
 
 ## Astuces et pense-bête
 
