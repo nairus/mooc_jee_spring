@@ -4,14 +4,17 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="..." class="...">
-        <!-- collaborators and configuration for this bean go here -->
+    <bean id="welcome" class="fr.eservices.sample2.impl.SwingWelcome">
+    </bean>
+    <bean id="greeter" class="fr.eservices.sample2.impl.FrenchGreeter">
+    </bean>
+    <bean id="printer" class="fr.eservices.sample2.impl.SwingPrinter">
     </bean>
 
-    <bean id="..." class="...">
-        <!-- collaborators and configuration for this bean go here -->
+    <bean id="app" class="fr.eservices.sample2.appl.Application">
+        <property name="welcome" ref="welcome" />
+        <property name="greeter" ref="greeter" />
+        <property name="printer" ref="printer"/>
     </bean>
-
-    <!-- more bean definitions go here -->
 
 </beans>
