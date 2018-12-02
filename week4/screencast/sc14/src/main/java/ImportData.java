@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import flights.Airline;
 import flights.Airport;
 import flights.Route;
+import flights.RouteId;
 
 public class ImportData {
 	
@@ -160,7 +161,6 @@ public class ImportData {
 		if ( airlineId == null ) return null;
 		if ( !existingAirline.contains(airlineId) ) return null;
 		airline.setId( airlineId );
-		route.setAirline( airline );
 		
 		route.setSourceCode(parseNull(data[i++], ImportData::nopParse));
 		Airport source = new Airport();
@@ -168,7 +168,6 @@ public class ImportData {
 		if ( sourceId == null ) return null;
 		if ( !existingAirport.contains(sourceId) ) return null;
 		source.setId( sourceId );
-		route.setSource(source);
 		
 		route.setDestinationCode(parseNull(data[i++], ImportData::nopParse));
 		Airport dest = new Airport();
@@ -176,7 +175,8 @@ public class ImportData {
 		if ( destId == null ) return null;
 		if ( !existingAirport.contains(destId) ) return null;
 		dest.setId( destId );
-		route.setDestination(dest);
+		
+		route.setRouteId( new RouteId(airline, source, dest) );
 		
 		route.setCodeshare( parseNull(data[i++], ImportData::booleanParse) );
 		route.setStops(parseNull(data[i++], Short::parseShort)  );

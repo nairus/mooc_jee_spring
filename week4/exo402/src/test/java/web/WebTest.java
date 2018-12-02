@@ -16,7 +16,10 @@ public class WebTest {
 	
 	@Before
 	public void init() {
-		wt = new WebTool("localhost:8080", "/exo402");
+		String p = System.getProperty("usePort");
+		if ( p == null ) p = "8080";
+		wt = new WebTool("localhost:"+p, "/exo402");
+		System.out.println("Use base url: http://localhost:"+p+"/exo402");
 	}
 	
 	@Test
