@@ -31,7 +31,7 @@ String ctxPath = request.getContextPath();
 	    	<!-- Default panel contents -->
 	    	<div class="panel-heading">Panel heading</div>
 	    	
-	    	Message is : xxxx
+	    	Message is : ${message}
 	    	
 	    	
 	    </div>

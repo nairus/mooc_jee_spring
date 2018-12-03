@@ -8,7 +8,7 @@
     </bean>
     <bean id="greeter" class="fr.eservices.sample2.impl.FrenchGreeter">
     </bean>
-    <bean id="printer" class="fr.eservices.sample2.impl.SwingPrinter">
+    <bean id="printer" class="fr.eservices.sample2.impl.ConsolePrinter">
     </bean>
 
     <bean id="app" class="fr.eservices.sample2.appl.Application">
