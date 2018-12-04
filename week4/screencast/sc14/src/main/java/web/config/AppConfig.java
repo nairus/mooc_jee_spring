@@ -10,13 +10,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ApplicationContextEvent;
 import org.springframework.context.event.ContextClosedEvent;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-// TODO : choose packages to scan for components / controllers
-@ComponentScan("web.ctrl")
+// choose packages to scan for components / controllers
+@ComponentScan({ "web.ctrl", "dao" })
 public class AppConfig implements ApplicationListener<ApplicationContextEvent> {
 
     private static Logger log = LoggerFactory.getLogger(AppConfig.class);
@@ -29,7 +30,13 @@ public class AppConfig implements ApplicationListener<ApplicationContextEvent> {
         return res;
     }
 
-    // TODO: expose an EntityManagerFactory
+    // expose an EntityManagerFactory
+    @Bean
+    public LocalContainerEntityManagerFactoryBean emf() {
+        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+        emf.setPersistenceUnitName("myApp");
+        return emf;
+    }
 
     @Override
     public void onApplicationEvent(ApplicationContextEvent event) {
