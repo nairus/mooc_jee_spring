@@ -1,25 +1,30 @@
 package dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
 import flights.Route;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Component;
 
-// TODO : expose as component
+// expose as component
+@Component
 public class RouteDao {
 
-	// TODO : inject EntityManager
-	private EntityManager em;
-	
-	public List<Route> findRoutesByCountries(String fromCountry, String toCountry) {
-		List<Route> res = new ArrayList<>();
-		
-		// TODO : build a request an return routes
+    // inject EntityManager
+    @PersistenceContext
+    private EntityManager em;
 
-		
-		return res;
-	}
+    public List<Route> findRoutesByCountries(String fromCountry, String toCountry) {
+        // build a request an return routes
+        List<Route> res = em.createQuery("SELECT rt FROM Route as rt "
+                + "JOIN rt.source as src "
+                + "JOIN rt.destination dst "
+                + "WHERE src.country=:from AND dst.country=:to",
+                Route.class)
+                .setParameter("from", fromCountry)
+                .setParameter("to", toCountry)
+                .getResultList();
+        return res;
+    }
 
 }
