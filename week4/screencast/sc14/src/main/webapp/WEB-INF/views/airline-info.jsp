@@ -62,7 +62,7 @@
                   Find how to check the box if airline is active !
                 -->
                 <input id="fActive" type="checkbox"
-                       <% if (airline.active) {%>checked<%}%> />Active
+                        ${airline.active ? "checked" : "" }>Active
             </label>
         </div>
 

@@ -39,6 +39,30 @@ public class RouteId implements Serializable {
     @ManyToOne
     private Airport destination;
 
+    public Airline getAirline() {
+        return airline;
+    }
+
+    public void setAirline(Airline airline) {
+        this.airline = airline;
+    }
+
+    public Airport getSource() {
+        return source;
+    }
+
+    public void setSource(Airport source) {
+        this.source = source;
+    }
+
+    public Airport getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Airport destination) {
+        this.destination = destination;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(airline, source, destination);
