@@ -34,12 +34,12 @@
         <scope>test</scope>
     </dependency>
     
-    <dependency>
-        <groupId>fr.eservices</groupId>
-        <artifactId>code-check</artifactId>
-        <version>3.1.0</version>
-        <scope>test</scope>
-    </dependency>
+<!--     <dependency> -->
+<!--         <groupId>fr.eservices</groupId> -->
+<!--         <artifactId>code-check</artifactId> -->
+<!--         <version>3.1.0</version> -->
+<!--         <scope>test</scope> -->
+<!--     </dependency> -->
     
 	<dependency>
 	    <groupId>org.hibernate</groupId>

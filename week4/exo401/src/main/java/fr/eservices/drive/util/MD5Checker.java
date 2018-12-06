@@ -1,11 +1,18 @@
 package fr.eservices.drive.util;
 
-public class MD5Checker implements PasswordChecker {
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
-	@Override
-	public String encode(String login, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+public class MD5Checker extends AbstractPasswordChecker {
+
+    @Override
+    protected byte[] processEncoding(String login, String password)
+            throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        StringBuilder sb = new StringBuilder();
+        sb.append(login).append(password);
+        MessageDigest messageDigest = MessageDigest.getInstance(PasswordEncoderEnum.MD5.getAlgorithm());
+        return messageDigest.digest(sb.toString().getBytes(AppConstants.ENCODED_CHARSET));
+    }
+
 }
