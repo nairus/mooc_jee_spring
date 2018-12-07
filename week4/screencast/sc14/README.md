@@ -8,7 +8,7 @@ Cette librairie peut aussi être utile pour se passer du fichier META-INF/persis
 
 ## Configuration des contrôleurs
 
-Commencez par implémenter le contrôleur et la vue d'édition de d'une compagnie aérienne.
+Commencez par implémenter le contrôleur et la vue d'édition d'une compagnie aérienne.
 
 * Exposez le contrôleur et le DAO dans le contexte
 * Configurez le ComponentScan pour découvrir ces composants
@@ -16,24 +16,24 @@ Commencez par implémenter le contrôleur et la vue d'édition de d'une compagni
 
 ## Configuration du contexte de persistance
 
-* Ajoutez une dépendance maven vers "spring-orm"
-* Exposez un EntityManagerFactory à l'aide de l'objet utilitaire spring "LocalContainerEntityManagerFactoryBean"
+* Ajoutez une dépendance Maven vers "spring-orm"
+* Exposez un EntityManagerFactory à l'aide de l'objet utilitaire Spring "LocalContainerEntityManagerFactoryBean"
 * Injectez le "contexte de persistance" dans votre DAO
-* Redémarrez tomcat pour vérifier le lancement d'hibernate pour le contexte de persistance
+* Redémarrez Tomcat pour vérifier le lancement d'Hibernate pour le contexte de persistance
 
-## Utiliser les DAO pour alimenter des vues
+## Utiliser les DAO pour alimenter les vues
 
-* modifiez le contrôleur pour utiliser le dao
-* ajouter les entitées issues du dao dans le model
-* utilisez les entitées dans la vue pour afficher les informations
+* Modifiez le contrôleur pour utiliser le DAO
+* Ajouter les entitées issues du DAO dans le modèle
+* Utilisez les entités dans la vue pour afficher les informations
 
 ## Lien avec le RESTController
 
-Implémentez le web service REST manipulant du JSON pour lister les routes aériennes.
+Implémentez le Web service REST manipulant du JSON pour lister les routes aériennes.
 
-* injectez le DAO dans le contrôleur REST
-* injectez le contexte de persistance dans le DAO
-* complétez la requête JPA du DAO pour retourner les routes
-* utilisez le DAO dans le contrôleur et retourner directement la liste des entitées
-* redémarrez tomcat et exécutez une requête pour vérifier le contenu de la réponse JSON
+* Injectez le DAO dans le contrôleur REST
+* Injectez le contexte de persistance dans le DAO
+* Complétez la requête JPA du DAO pour retourner les routes
+* Utilisez le DAO dans le contrôleur et retourner directement la liste des entitées
+* Redémarrez tomcat et exécutez une requête pour vérifier le contenu de la réponse JSON
 

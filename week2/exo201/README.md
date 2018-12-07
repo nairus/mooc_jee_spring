@@ -6,7 +6,7 @@ Prenez soin d'avoir, au final, un contexte web nommé "exo201".
 ## Implémentation d'un DAO avec JDBC
 
 - Téléchargez [JDBC SQLite Driver](https://oss.sonatype.org/content/repositories/releases/org/xerial/sqlite-jdbc/3.20.0/sqlite-jdbc-3.20.0.jar), et placez le dans le répertoire WEB-INF/lib
-- Complétez [UserDaoSqlite](WEB-INF/classes/UserDaoSqlite.java)
+- Complétez [UserDaoSqlite](WEB-INF/classes/user/UserDaoSqlite.java)
 
 A cette étape, vous devriez être en mesure de faire passer le "TestUserJDBC".  
 Un script est fourni pour exécuter ces tests, sinon :

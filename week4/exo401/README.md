@@ -40,23 +40,23 @@ Ainsi, même si deux utilisateurs possèdent le même mot de passe, ils auront u
 * Complétez la méthode getAnnotationAppContext de ChangePwdApp pour construire un contexte Spring utilisant les annotations : AnnotationConfigApplicationContext.
 
 Le test AnnotationContextTest devrait passer.  
-Vous devriez aussi être en mesure de lancer le programme et de choisir l'option 2  
+Vous devriez aussi être en mesure de lancer le programme et de choisir l'option 2.
 Vous pouvez utiliser le main de la classe UserJPADao pour ajouter un utilisateur en base.
 
-A noter : le provider JPA fourni par Hibernate va générer un pool de connexion qui écoute après les événements du contexte Spring. Lorsque le contexte s'arrête, les connexions seront fermée et l'EntityManagerFactory arrêté proprement.
+A noter : le provider JPA fourni par Hibernate va générer un pool de connexions qui écoute les événements du contexte Spring. Lorsque le contexte s'arrête, les connexions seront fermées et l'EntityManagerFactory arrêté proprement.
 
 ## Utilisation des fichiers xml de contexte
 
 L'objectif est de fournir un fichier créant un contexte avec l'implémentation JDBC du UserDAO et l'implémentation MD5 du PasswordChecker.
 
 * Déclarez un bean pour le checker MD5
-* Ajoutez un bean de connection SQL dans le contexte, créé à partir du DriverManager. Il vous faudra utiliser la notion de "factory-method" et utiliser "constructor-arg" pour passer des paramètres à cette méthode factory.
+* Ajoutez un bean de connection SQL dans le contexte, créé à partir du DriverManager. Il faudra utiliser la notion de "factory-method" et utiliser "constructor-arg" pour passer des paramètres à cette méthode factory.
 * Déclarez un bean pour le userDAO en utilisant l'implémentation JDBC, injectez-y les beans nécessaires.
 * Déclarez un bean pour l'objet ChangePwdApp et injectez le DAO.
 * Complétez la méthode getXmlAppContext pour utiliser un contexte chargeant un fichier xml dans le classpath : ClassPathXmlApplicationContext.
-* Ajoutez une méthode dans le l'implémentation JDBC pour fermer proprement la connexion lorsque le contexte spring s'arrête. Configurez le bean correspondant pour appeler cette méthode, à l'aide de "destroy-method".
+* Ajoutez une méthode dans l'implémentation JDBC pour fermer proprement la connexion lorsque le contexte Spring s'arrête. Configurez le bean correspondant pour appeler cette méthode, à l'aide de "destroy-method".
 
-Vous devriez être en mesure de lancer le programme et de choisir l'option 1  
+Vous devriez être en mesure de lancer le programme et de choisir l'option 1. 
 Vous pouvez utiliser le main de la classe UserJDBCDao pour ajouter un utilisateur en base.
 
 A noter : cette manière de déclarer une connexion directement sous la forme d'un bean, et de la fermer dans un DAO n'est pas une bonne pratique et ne correspond pas à un véritable cas pratique d'application. Nous voulons simplement ici illustrer les usages de la factory-method et de destroy-method.

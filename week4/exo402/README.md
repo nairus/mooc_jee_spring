@@ -1,19 +1,19 @@
 # Exercice 4/02
 
 Cet exercice vous permettra d'utiliser spring-webmvc.  
-Il est réalisable sans utiliser les éléments des exercices précédants.
+Il est réalisable sans utiliser les éléments des exercices précédents.
 
-Le pom définit un mode de packaging "war", ce qui permettra de construire une archive web s'exécutant dans un container web java compatible, tel que tomcat.  
+Le POM définit un mode de packaging "war", ce qui permettra de construire une archive web s'exécutant dans un container Web Java compatible, tel que Tomcat.
 Vous remarquerez qu'il y a peu de dépendances :
 
 * spring-webmvc : pour définir les contrôleurs et les liens avec les vues.
-* jackson-dataformat-csv : utiliser pour une implémentation mémoire du DAO Catalog.
-* javax.servlet-api : fourni par tomcat au runtime, défini le modèle de programmation "servlet".
+* jackson-dataformat-csv : utilisé pour une implémentation mémoire du DAO Catalog.
+* javax.servlet-api : fourni par Tomcat au runtime, défini le modèle de programmation "servlet".
 * junit : pour nos tests unitaires
 
-Evidemment, chacune de ces librairies dépendent elle-même d'autres librairies, ce qui nous impose de produire un war contenant une bonne dizaine de jar.
+Evidemment, chacune de ces librairies dépend elle-même d'autres librairies, ce qui nous impose de produire un war contenant une bonne dizaine de fichiers jar.
 
-## Configurer un contexte web pour spring
+## Configurer un contexte Web pour Spring
 
 Il faut commencer par enregistrer la DispatcherServlet de spring-webmvc.  
 Cela se fait au moyen d'un fichier "web.xml", ou en étendant WebApplicationInitializer et sa méthode "onStartup".  
@@ -28,10 +28,10 @@ Ouvrez la classe CatalogController.
 
 * exposez cette classe dans le contexte comme un contrôleur
 * injectez une référence de CatalogMockDao
-* configurez convenablement le mapping des url pour que les opérations "list" et "categoryContent" soient respectivement appelées lors de l'utilisation des url /catalog/categories.html et /catalog/category/ID.html (ID étant l'identifiant de la catégorie à afficher).
-* Implémentez les deux opérations pour mettre à disposition du model les objets issus du DAO.
+* configurez convenablement le mapping des URLs pour que les opérations "list" et "categoryContent" soient respectivement appelées lors de l'utilisation des URLs /catalog/categories.html et /catalog/category/ID.html (ID étant l'identifiant de la catégorie à afficher).
+* Implémentez les deux opérations pour mettre à disposition du modèle les objets issus du DAO.
 * Ces opérations retourneront le nom logique des vues à afficher.
-* Ajoutez un ViewResolver dans le contexte de spring pour permettre de placer toutes les vues dans /WEB-INF/views et d'ajouter automatiquement l'extension "jsp" à ces vues.
+* Ajoutez un ViewResolver dans le contexte de Spring pour permettre de placer toutes les vues dans /WEB-INF/views et d'ajouter automatiquement l'extension "jsp" à ces vues.
 
 ## Implémenter les vues
 
@@ -53,7 +53,7 @@ Pour chaque produit, on affichera :
 
 ## Implémenter un webservice manipulant des données JSON
 
-Pour permettre à spring de manipuler des objets en entrée ou sortie au format JSON, il est nécessaire d'avoir une librairie tierse dans le classpath au runtime.  
+Pour permettre à Spring de manipuler des objets en entrée ou sortie au format JSON, il est nécessaire d'avoir une librairie tierce dans le classpath au runtime.  
 Notre application possède déjà une dépendance vers une telle librairie. En effet, le mock du DAO Catalog utilise une partie de la librairie "jackson" qui permet de transformer du JSON en objet java et inversement.  
 Si ce n'était pas le cas, il faudrait ajouter la dépendance vers l'artefact "jackson-databind" du groupe "com.fasterxml.jackson.core". Cette dépendance étant uniquement nécessaire par spring à l'éxécution, il serait possible de mettre cette dépendance en scope "runtime".
 
@@ -66,7 +66,7 @@ Complétez la classe "RestHistoryController" pour exposer les deux opérations "
 Les deux opérations seront exposées sur la même URL "/history/ID.json" (ID étant l'identifiant de la commande concernée).  
 La première opération sera exposée sur les opération HTTP GET, la seconde uniquement sur du "POST".
 
-le paramètre StatusHistory de l'opération "addStatus" sera créé à partir du corps de la requête HTTP, sous la forme d'un objet JSON transformé automatiquement en java par la librairie "jackson".
+Le paramètre StatusHistory de l'opération "addStatus" sera créé à partir du corps de la requête HTTP, sous la forme d'un objet JSON transformé automatiquement en Java par la librairie "jackson".
 
 L'opération "addStatus" renverra "Ok" si le status est correctement ajouté, "Error" si une exception est générée (exemple : commande introuvable).
 
