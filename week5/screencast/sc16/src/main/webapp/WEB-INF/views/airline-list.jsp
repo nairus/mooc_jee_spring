@@ -44,7 +44,7 @@
 	<td>${airline.country}</td>
   </tr>
   </c:forEach>
-  
+
 </table>
 
 <nav aria-label="Page navigation">
@@ -54,8 +54,8 @@
         <span aria-hidden="true">|&laquo;</span>
       </a>
     </li>
-	<c:forEach var="i" 
-		begin="${list.number-10 > 0 ? list.number-10 : 1}" 
+	<c:forEach var="i"
+		begin="${list.number-10 > 0 ? list.number-10 : 1}"
 		end="${list.number+10 < list.totalPages ? list.number+10 : list.totalPages}">
     <li class="${ i == list.number+1 ? 'active' : ''}"><a href="?page=${i}&country=${param.country}">${i}</a></li>
 	</c:forEach>

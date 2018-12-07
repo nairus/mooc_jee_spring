@@ -17,4 +17,10 @@ public enum PasswordEncoderEnum {
     public void setAlgorithm(String algorithm) {
         this.algorithm = algorithm;
     }
+
+    @Override
+    public String toString() {
+        return algorithm;
+    }
+
 }

@@ -7,6 +7,11 @@ import java.security.NoSuchAlgorithmException;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+@Qualifier(value = AppConstants.HMAC_SHA1)
 public class HmacChecker extends AbstractPasswordChecker {
 
     @Override

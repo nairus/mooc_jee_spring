@@ -8,13 +8,20 @@ import java.sql.SQLException;
 
 import fr.eservices.drive.dao.UserDao;
 import fr.eservices.drive.model.User;
+import fr.eservices.drive.util.PasswordChecker;
 
 public class UserJDBCDao extends UserDao {
 
     Connection conn;
 
-    protected void setConnection(Connection conn) {
+    PasswordChecker passwordChecker;
+
+    public void setConn(Connection conn) {
         this.conn = conn;
+    }
+
+    public void setPasswordChecker(PasswordChecker passwordChecker) {
+        this.passwordChecker = passwordChecker;
     }
 
     @Override
@@ -85,7 +92,7 @@ public class UserJDBCDao extends UserDao {
     public static void main(String[] args) throws Exception {
         Connection conn = DriverManager.getConnection("jdbc:h2:./db");
         UserJDBCDao dao = new UserJDBCDao();
-        dao.setConnection(conn);
+        dao.setConn(conn);
 
         User u = new User();
         u.setFirstname("Guillaume");
@@ -93,6 +100,14 @@ public class UserJDBCDao extends UserDao {
         u.setLogin("dufrene");
         u.setPassword("eservices");
         dao.save(u);
+
+        conn.close();
+    }
+
+    public void close() throws SQLException {
+        if (null == this.conn) {
+            return;
+        }
 
         conn.close();
     }

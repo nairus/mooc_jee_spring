@@ -4,6 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+@Qualifier(AppConstants.MD5)
 public class MD5Checker extends AbstractPasswordChecker {
 
     @Override
