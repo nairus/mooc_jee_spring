@@ -1,9 +1,12 @@
 package fr.eservices.drive.repository;
 
-import fr.eservices.drive.dao.OrderDao;
+import java.util.List;
 
-public interface OrderRepository 
-extends OrderDao
-{
+import org.springframework.data.repository.CrudRepository;
 
+import fr.eservices.drive.model.Order;
+
+public interface OrderRepository extends CrudRepository<Order, Long> {
+
+    List<Order> findByCustomerId(String customerId);
 }

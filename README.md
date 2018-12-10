@@ -1,6 +1,6 @@
 # mooc_jee_spring
 
-OOC Java EE Spring prêt à l'emploi
+MOOC Java EE Spring prêt à l'emploi
 
 ## Notes perso
 

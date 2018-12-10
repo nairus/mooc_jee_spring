@@ -15,12 +15,20 @@ $(function() {
 			dataType: "json",
 			contentType: 'application/json',
 			data: JSON.stringify( {id: ref, qty: 1} )
+		}).done(function(data){
+			// refresh cart contents on success
+			displayCartContent();
 		});
 	});
 	
-	$.ajax({
-		url: "cart/-1.html"
-	}).done(function(data){
-		JSON.stringify( $('#cartInHeader').html(data) )
-	});
+	var displayCartContent = function() {
+		$.ajax({
+			url: "cart/1.html",
+			contentType: "text/html;charset=UTF-8",
+		}).done(function(data){
+			JSON.stringify( $('#cartInHeader').html(data) )
+		});
+	};
+	
+	displayCartContent();
 });

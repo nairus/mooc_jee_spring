@@ -11,6 +11,7 @@
 <name>Screencast JSTL</name>
 
 <properties>
+    <failOnMissingWebXml>false</failOnMissingWebXml>
 	<maven.compiler.source>1.8</maven.compiler.source>
 	<maven.compiler.target>1.8</maven.compiler.target>
 	<spring.version>4.3.9.RELEASE</spring.version>
